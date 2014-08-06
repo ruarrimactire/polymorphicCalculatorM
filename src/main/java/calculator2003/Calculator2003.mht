@@ -1,0 +1,625 @@
+Subject: 
+Date: Thu, 24 Jul 2014 12:38:54 +0200
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_000_0009_01CFA73C.449C8B20"
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Unsent: 1
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.6157
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0009_01CFA73C.449C8B20
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+http://www.csis.pace.edu/~bergin/polycalc/
+A Simple Calculator for Novice Learning
+Joseph Bergin=20
+This page presents the Java code of a calculator I developed to =
+demonstrate what can be done in an object-oriented language without =
+using if or while. It implements the key parts of a simple four function =
+algebraic calculator that has no knowledge of operator precedence. It =
+has been used as the first introduction to Java and object-orientation =
+with a group of adults. There are three parts to the code. The model =
+implements the calculator itself. As such it has only a functional =
+interface. You write code to exercise it. The GUI is completely =
+separate, similar to the model-view-controller architecture. It is built =
+with just AWT. The third part is a set of tests using the JUnit =
+(http://junit.org) testing framework. It was developed using the "test =
+first" methodology advocated in eXtreme Programming (XP -- =
+http://www.xprogramming.org/).=20
+
+What is shown here was developed by myself in preparation for a two day =
+short course. This code was not shown to students, but rather was =
+re-built live in front of the class using an overhead projector while =
+pair-programming (http://www.pairprogramming.com/) with one of the =
+members of the class. In six hours (three two-hour sessions) we =
+developed most of this except the GUI and the inner NullOperator class. =
+With another hour we could probably have finished what is presented =
+here.=20
+
+As the code was being built in front of the class, no code was written =
+for the calculator unless we first had a test for it. This was =
+facilitated by using Eclipse (http://eclipse.org) which is both =
+integrated with JUnit and has a refactoring layer. In addition, it =
+writes class and method skeletons with needed constructors, methods to =
+be implemented from interfaces, and JavaDoc skeletons.=20
+
+Prior to this demonstration, the students were given a two-hour =
+lecture/discussion in which the key ideas (encapsulation, message =
+passing, and polymorphism) were discussed and motivated through various =
+metaphors and role play exercises. The first Java shown was an interface =
+that defined the behavior of the "Actors" in a role play. Nowhere was =
+there any discussion of Java syntax, though questions were taken and =
+answered while the demonstration was going on. The demonstration took =
+about 6 hours total over three sessions. A different student paired with =
+the instructor for each session. Since the students were novices and the =
+instructor took the "driver" role in the pair, the student "navigator" =
+could not contribute much, though several times the student caught =
+errors made by the "driver." The instructor also took suggestions from =
+the "navigator" on method names, etc. I also took time out during the =
+demonstration to discuss and motivate the Strategy and Decorator =
+patterns. The other patterns in the code are Singleton, Null Object, and =
+Immutable. Given more time for refactoring we would have done Typesafe =
+Enumeration as well.=20
+
+Note that the code design is intentionally not perfect as the students =
+were expected to do some refactoring and add additional features after =
+the demonstration -- again in a pair programming mode. Some of the =
+classes here should be inner to the model, for example. The GUI is also =
+too simple, using only a flow layout to avoid complication.=20
+
+Presenting the code does not, unfortunately, give you any idea about the =
+path used in its creation. This path involved writing a simple test and =
+running it (it fails of course), writing a bit of code to make the test =
+pass, running the test again, etc. All the while the pair of programmers =
+is discussing issues about the code such as names and structure as well =
+as algorithms. As a result, the code we actually built differs a bit =
+from this. The students were told, by the way, that this wasn't an =
+entirely live demo and that the instructor had prepared before. It was =
+an elaborate "play." However, at one point we did go live and some =
+unanticipated problems arose. This is fine to do, but not if it is =
+extensive at the beginning.=20
+
+Part of the educational philosophy used in developing this code is that =
+object-orientation is a new paradigm and that students need to be taught =
+early to think in this paradigm. The code solves all of its problems =
+using encapsulation, message passing, and dynamic polymorphism. It does =
+not have a single explicit logical test or selection. Whenever two =
+options occur for an action, different strategy objects are used, with =
+each strategy knowing one of the options. This increases the number of =
+objects and the number of messages, but also makes each piece of the =
+application quite simple.=20
+
+The problem solved with the strategies is that a number key has to =
+behave differently just after an operator key is hit. At this time it =
+needs to save the display to a save location and clear the display so =
+that the new value can be begun (with the key just hit) rather than just =
+shifting the current value left and appending its own value. Rather than =
+solve this problem with an if, we have two strategies. They switch at =
+well determined times.=20
+
+There are several reasons for solving the problem this way. With novices =
+we want to teach object-oriented problem solving not imperative. We want =
+this to be the default way of thinking, so we start with it. It helps us =
+avoid "paradigm switch" problems later. In general, however, such =
+solutions increase maintainability of code, since decisions made with =
+if's are often repeated in large programs. This has been found to be a =
+maintenance headache as the testing is duplicated throughout a program =
+(if you make a decision somewhere the chances are high that you will =
+make the same decision elsewhere). Changes to the problem require =
+revisiting all these decision points and the tools don't help you find =
+them in a large program. The technique used here brings all these =
+decison points together in one place so the code has a single point of =
+change as the problem evolves. Furthermore, we find it an advantage in =
+teaching OO to have lots of objects, each simple, sending messages, =
+interpreted polymorphically. We make "delegation" our friend.=20
+
+
+-------------------------------------------------------------------------=
+-------
+
+An astute reader may notice that in the code the Key classes are =
+actually superfluous. The model class has all of the functionality. The =
+Keys were used to make the code match the metaphor (physical analogy, =
+actually) used as the basis of thinking -- a physical calculator.=20
+
+A number of "code smells" are also noted in the code. Some of the =
+classes should be inner to the model. Some should be singletons. These =
+were intended to allow student exercises.
+
+Also note that not all of the Keys are in place. This again is to permit =
+very simple student exercises as this is intended for a first exposure =
+to Java. The first exercise was to use cut-paste to create a MinusKey =
+from the given PlusKey. By the way, the student exercises were all done =
+in pair-programming mode, in which the pairs were asked to estimate the =
+time for the task before attempting it, and to develop a JUnit a test =
+for the code before writing the code itself. They recorded actual times =
+as well, of course. About three hours were devoted to exercises, done in =
+the classroom.
+
+The Code
+The JUnit tests: CalculatorTest.java
+
+The Calculator itself
+
+  CalculatorModel.java
+
+  Key.java (an interface)
+
+  OperatorKey.Java (a derived interface)
+
+  NumberKey.java
+
+  PlusKey.java
+
+  EqualsKey.java
+
+  NumberStrategy.java (an interface)
+
+  AccumulateStrategy.java=20
+
+  SaveStrategy.java (a decorator for number strategies)
+
+
+
+The GUI Calculator.java (developed after everything else)
+
+
+-------------------------------------------------------------------------=
+-------
+
+Download all the code as a zip file: calculator2003.zip
+
+
+-------------------------------------------------------------------------=
+-------
+
+Some Insight
+If you are an instructor who learned procedural programming and are =
+struggling with object-oriented programming an insight might help you =
+understand this code and why it is good code. In procedural programming =
+to solve the problem we have here in which the numeric keys must behave =
+(slightly) differently just after an operator key is hit, a flag of some =
+sort would typically be used. I use the term "flag" very generally, =
+though. Sometimes it is an actual variable that you declare for the =
+purpose, which can be given a value to be tested later. Sometimes there =
+is an expression in your program that can be evaluated in a test without =
+declaring any new variables. In both cases I will call this a flag. In =
+object-oriented programming, the key insight is that data (flags as well =
+as other data) can have behavior. Suppose we think of the strategy =
+objects in this program as "flags with behavior." Since we have two =
+values of this "flag" we can attach different behaviors to them. What =
+makes it object-oriented, however, is that, since each object knows its =
+own behavior, we don't need any explicit test to determine which value =
+of the flag we have.We just tell the current value to execute its known =
+behavior.=20
+
+In this particular example we used interfaces to define the behavior of =
+the strategies. This gives us great flexibility, but inheritance can =
+also be used in many situations. Since the behavor of one of the =
+strategies was a simple extension of the other, we used the Decorator =
+pattern to define the variation, though this was special to this case. =
+Had the behaviors been entirely different, we would have defined a new =
+class for it directly, rather than use a decorator.=20
+
+Another smaller level insight might help also. In procedural "top-down" =
+programming you often write auxiliary (helper) functions to make your =
+code more comprehensible and to avoid writing long and complicated =
+procedures. In object-oriented programming we do this much less often. =
+Instead, however, we often use delegation in the same situation. Instead =
+of writing a new function to handle a small part of a complex task, we =
+create a new object to do the same. The sub-task is then delegated to =
+the new object, much as a worker might delegate part of her task to a =
+colleague. Again, this object can have behavior, even quite complicated =
+behavior, hidden behind a simple interface. We delegate to strategies =
+here.=20
+
+Caveat: The above three paragraphs are intended as information for the =
+instructor previously trained in procedural programming. It is not =
+intended as something to teach students. I teach about delegation, not =
+about flags; about polymorphism, not about moving from if tests to =
+polymorphism. It is an effective way to teach students who don't have =
+the same background that their instructors do. It has often been =
+observed that objects are easier for students than for their =
+instructors, since the students don't have to integrate this way of =
+thinking into older thought patterns and habits.=20
+
+
+-------------------------------------------------------------------------=
+-------
+
+A final note: We had several objectives for this 11 hour course taught =
+over two days. In addition to introducing Java, Eclipse, XP, JUnit, and =
+patterns we wanted to bring the 16 people who had not previously met =
+together into a cohesive group. We wanted them to bond with each other =
+and with the instructors to enable future work. The course is jointly =
+taught by myself and Fred Grossman with assistance from Barry Jones and =
+Ron Frank. For what we did here, four instructors is overkill, however. =
+One person in addition to the instructor would be helpful during the =
+exercise portion so that the students can be given help quickly as =
+needed. Most of the help required was with Eclipse, actually. There was =
+also a bit of confusion about JUnit in this brief introduction and the =
+concept of testing separate from production code. The course lasted =
+longer than the 11 hours described, actually, though most of the rest =
+was busy work for the students. Barry and Ron helped the students get =
+all of the software installed on their laptops, for example. This took =
+longer than we expected.=20
+
+Last updated: August 22, 2003
+
+------=_NextPart_000_0009_01CFA73C.449C8B20
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META name=3DGENERATOR content=3D"MSHTML 8.00.6001.23588">
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT size=3D2 face=3DArial>
+<H1 align=3Dcenter><A =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/"><FONT=20
+size=3D2>http://www.csis.pace.edu/~bergin/polycalc/</FONT></A></H1>
+<H1 align=3Dcenter>A Simple Calculator for Novice Learning</H1>
+<H3 align=3Dcenter>Joseph Bergin </H3>
+<P>This page presents the Java code of a calculator I developed to =
+demonstrate=20
+what can be done in an object-oriented language without using =
+<EM>if</EM> or=20
+<EM>while</EM>. It implements the key parts of a simple four function =
+algebraic=20
+calculator that has no knowledge of operator precedence. It has been =
+used as the=20
+first introduction to Java and object-orientation with a group of =
+adults. There=20
+are three parts to the code. The model implements the calculator itself. =
+As such=20
+it has only a functional interface. You write code to exercise it. The =
+GUI is=20
+completely separate, similar to the model-view-controller architecture. =
+It is=20
+built with just AWT. The third part is a set of tests using the JUnit =
+(<A=20
+href=3D"http://junit.org/">http://junit.org</A>) testing framework. It =
+was=20
+developed using the "test first" methodology advocated in eXtreme =
+Programming=20
+(XP -- <A =
+href=3D"http://www.xprogramming.org/">http://www.xprogramming.org/</A>). =
+
+</P>
+<P>What is shown here was developed by myself in preparation for a two =
+day short=20
+course. This code was not shown to students, but rather was re-built =
+live in=20
+front of the class using an overhead projector while pair-programming =
+(<A=20
+href=3D"http://www.pairprogramming.com/">http://www.pairprogramming.com/<=
+/A>) with=20
+one of the members of the class. In six hours (three two-hour sessions) =
+we=20
+developed most of this except the GUI and the inner NullOperator class. =
+With=20
+another hour we could probably have finished what is presented here. =
+</P>
+<P>As the code was being built in front of the class, no code was =
+written for=20
+the calculator unless we first had a test for it. This was facilitated =
+by using=20
+Eclipse (<A href=3D"http://eclipse.org/">http://eclipse.org</A>) which =
+is both=20
+integrated with JUnit and has a refactoring layer. In addition, it =
+writes class=20
+and method skeletons with needed constructors, methods to be implemented =
+from=20
+interfaces, and JavaDoc skeletons. </P>
+<P>Prior to this demonstration, the students were given a two-hour=20
+lecture/discussion in which the key ideas (encapsulation, message =
+passing, and=20
+polymorphism) were discussed and motivated through various metaphors and =
+role=20
+play exercises. The first Java shown was an interface that defined the =
+behavior=20
+of the "Actors" in a role play. Nowhere was there any discussion of Java =
+syntax,=20
+though questions were taken and answered while the demonstration was =
+going on.=20
+The demonstration took about 6 hours total over three sessions. A =
+different=20
+student paired with the instructor for each session. Since the students =
+were=20
+novices and the instructor took the "driver" role in the pair, the =
+student=20
+"navigator" could not contribute much, though several times the student =
+caught=20
+errors made by the "driver." The instructor also took suggestions from =
+the=20
+"navigator" on method names, etc. I also took time out during the =
+demonstration=20
+to discuss and motivate the Strategy and Decorator patterns. The other =
+patterns=20
+in the code are Singleton, Null Object, and Immutable. Given more time =
+for=20
+refactoring we would have done Typesafe Enumeration as well. </P>
+<P>Note that the code design is intentionally not perfect as the =
+students were=20
+expected to do some refactoring and add additional features after the=20
+demonstration -- again in a pair programming mode. Some of the classes =
+here=20
+should be inner to the model, for example. The GUI is also too simple, =
+using=20
+only a flow layout to avoid complication. </P>
+<P>Presenting the code does not, unfortunately, give you any idea about =
+the path=20
+used in its creation. This path involved writing a simple test and =
+running it=20
+(it fails of course), writing a bit of code to make the test pass, =
+running the=20
+test again, etc. All the while the pair of programmers is discussing =
+issues=20
+about the code such as names and structure as well as algorithms. As a =
+result,=20
+the code we actually built differs a bit from this. The students were =
+told, by=20
+the way, that this wasn't an entirely live demo and that the instructor =
+had=20
+prepared before. It was an elaborate "play." However, at one point we =
+did go=20
+live and some unanticipated problems arose. This is fine to do, but not =
+if it is=20
+extensive at the beginning. </P>
+<P>Part of the educational philosophy used in developing this code is =
+that=20
+object-orientation is a new paradigm and that students need to be taught =
+early=20
+to think in this paradigm. The code solves all of its problems using=20
+encapsulation, message passing, and dynamic polymorphism. It does not =
+have a=20
+single explicit logical test or selection. Whenever two options occur =
+for an=20
+action, different strategy objects are used, with each strategy knowing =
+one of=20
+the options. This increases the number of objects and the number of =
+messages,=20
+but also makes each piece of the application quite simple. </P>
+<P>The problem solved with the strategies is that a number key has to =
+behave=20
+differently just after an operator key is hit. At this time it needs to =
+save the=20
+display to a save location and clear the display so that the new value =
+can be=20
+begun (with the key just hit) rather than just shifting the current =
+value left=20
+and appending its own value. Rather than solve this problem with an if, =
+we have=20
+two strategies. They switch at well determined times. </P>
+<P>There are several reasons for solving the problem this way. With =
+novices we=20
+want to teach object-oriented problem solving not imperative. We want =
+this to be=20
+the default way of thinking, so we start with it. It helps us avoid =
+"paradigm=20
+switch" problems later. In general, however, such solutions increase=20
+maintainability of code, since decisions made with if's are often =
+repeated in=20
+large programs. This has been found to be a maintenance headache as the =
+testing=20
+is duplicated throughout a program (if you make a decision somewhere the =
+chances=20
+are high that you will make the same decision elsewhere). Changes to the =
+problem=20
+require revisiting all these decision points and the tools don't help =
+you find=20
+them in a large program. The technique used here brings all these =
+decison points=20
+together in one place so the code has a single point of change as the =
+problem=20
+evolves. Furthermore, we find it an advantage in teaching OO to have =
+lots of=20
+objects, each simple, sending messages, interpreted polymorphically. We =
+make=20
+"delegation" our friend. </P>
+<HR width=3D"40%">
+
+<P>An astute reader may notice that in the code the Key classes are =
+actually=20
+superfluous. The model class has all of the functionality. The Keys were =
+used to=20
+make the code match the metaphor (physical analogy, actually) used as =
+the basis=20
+of thinking -- a physical calculator. </P>
+<P>A number of "code smells" are also noted in the code. Some of the =
+classes=20
+should be inner to the model. Some should be singletons. These were =
+intended to=20
+allow student exercises.</P>
+<P>Also note that not all of the Keys are in place. This again is to =
+permit very=20
+simple student exercises as this is intended for a first exposure to =
+Java. The=20
+first exercise was to use cut-paste to create a MinusKey from the given =
+PlusKey.=20
+By the way, the student exercises were all done in pair-programming =
+mode, in=20
+which the pairs were asked to estimate the time for the task before =
+attempting=20
+it, and to develop a JUnit a test for the code before writing the code =
+itself.=20
+They recorded actual times as well, of course. About three hours were =
+devoted to=20
+exercises, done in the classroom.</P>
+<H3>The Code</H3>
+<P>The JUnit tests: <A=20
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/CalculatorTest.java">Ca=
+lculatorTest.java</A></P>
+<P>The Calculator itself</P>
+<BLOCKQUOTE>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/CalculatorModel.java">C=
+alculatorModel.java</A></P>
+  <P><A =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/Key.java">Key.java</A> =
+
+  (an interface)</P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/OperatorKey.java">Opera=
+torKey.Java</A>=20
+  (a derived interface)</P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/NumberKey.java">NumberK=
+ey.java</A></P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/PlusKey.java">PlusKey.j=
+ava</A></P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/EqualsKey.java">EqualsK=
+ey.java</A></P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/NumberStrategy.java">Nu=
+mberStrategy.java</A>=20
+  (an interface)</P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/AccumulateStrategy.java=
+">AccumulateStrategy.java</A>=20
+  </P>
+  <P><A=20
+  =
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/SaveStrategy.java">Save=
+Strategy.java</A>=20
+  (a decorator for number strategies)</P>
+  <P>&nbsp;</P></BLOCKQUOTE>
+<P>The GUI <A=20
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/Calculator.java">Calcul=
+ator.java</A>=20
+(developed after everything else)</P>
+<HR width=3D"40%">
+
+<P>Download all the code as a zip file: <A=20
+href=3D"http://www.csis.pace.edu/~bergin/polycalc/calculator2003.zip">cal=
+culator2003.zip</A></P>
+<HR width=3D"40%">
+
+<H3>Some Insight</H3>
+<P>If you are an instructor who learned procedural programming and are=20
+struggling with object-oriented programming an insight might help you =
+understand=20
+this code and why it is good code. In procedural programming to solve =
+the=20
+problem we have here in which the numeric keys must behave (slightly)=20
+differently just after an operator key is hit, a flag of some sort would =
+
+typically be used. I use the term "flag" very generally, though. =
+Sometimes it is=20
+an actual variable that you declare for the purpose, which can be given =
+a value=20
+to be tested later. Sometimes there is an expression in your program =
+that can be=20
+evaluated in a test without declaring any new variables. In both cases I =
+will=20
+call this a flag. In object-oriented programming, the key insight is =
+that data=20
+(flags as well as other data) can have behavior. Suppose we think of the =
+
+strategy objects in this program as "flags with behavior." Since we have =
+two=20
+values of this "flag" we can attach different behaviors to them. What =
+makes it=20
+object-oriented, however, is that, since each object knows its own =
+behavior, we=20
+don't need any explicit test to determine which value of the flag we =
+have.We=20
+just tell the current value to execute its known behavior. </P>
+<P>In this particular example we used interfaces to define the behavior =
+of the=20
+strategies. This gives us great flexibility, but inheritance can also be =
+used in=20
+many situations. Since the behavor of one of the strategies was a simple =
+
+extension of the other, we used the Decorator pattern to define the =
+variation,=20
+though this was special to this case. Had the behaviors been entirely =
+different,=20
+we would have defined a new class for it directly, rather than use a =
+decorator.=20
+</P>
+<P>Another smaller level insight might help also. In procedural =
+"top-down"=20
+programming you often write auxiliary (helper) functions to make your =
+code more=20
+comprehensible and to avoid writing long and complicated procedures. In=20
+object-oriented programming we do this much less often. Instead, =
+however, we=20
+often use delegation in the same situation. Instead of writing a new =
+function to=20
+handle a small part of a complex task, we create a new object to do the =
+same.=20
+The sub-task is then delegated to the new object, much as a worker might =
+
+delegate part of her task to a colleague. Again, this object can have =
+behavior,=20
+even quite complicated behavior, hidden behind a simple interface. We =
+delegate=20
+to strategies here. </P>
+<P><STRONG>Caveat</STRONG>: The above three paragraphs are intended as=20
+information for the instructor previously trained in procedural =
+programming. It=20
+is not intended as something to teach students. I teach about =
+delegation, not=20
+about flags; about polymorphism, not about moving from <EM>if</EM> tests =
+to=20
+polymorphism. It is an effective way to teach students who don't have =
+the same=20
+background that their instructors do. It has often been observed that =
+objects=20
+are easier for students than for their instructors, since the students =
+don't=20
+have to integrate this way of thinking into older thought patterns and =
+habits.=20
+</P>
+<HR width=3D"40%">
+
+<P>A final note: We had several objectives for this 11 hour course =
+taught over=20
+two days. In addition to introducing Java, Eclipse, XP, JUnit, and =
+patterns we=20
+wanted to bring the 16 people who had not previously met together into a =
+
+cohesive group. We wanted them to bond with each other and with the =
+instructors=20
+to enable future work. The course is jointly taught by myself and Fred =
+Grossman=20
+with assistance from Barry Jones and Ron Frank. For what we did here, =
+four=20
+instructors is overkill, however. One person in addition to the =
+instructor would=20
+be helpful during the exercise portion so that the students can be given =
+help=20
+quickly as needed. Most of the help required was with Eclipse, actually. =
+There=20
+was also a bit of confusion about JUnit in this brief introduction and =
+the=20
+concept of testing separate from production code. The course lasted =
+longer than=20
+the 11 hours described, actually, though most of the rest was busy work =
+for the=20
+students. Barry and Ron helped the students get all of the software =
+installed on=20
+their laptops, for example. This took longer than we expected. </P>
+<P>Last updated: August 22, 2003</P></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0009_01CFA73C.449C8B20--
