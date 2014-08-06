@@ -16,20 +16,24 @@ public class Calculator extends Frame
 	{
 		super("Simple Calc");
 		setName("Calculator");
-		setSize(400,200);
+		setSize(150,300);
 		setBackground(Color.blue);
 		setLayout(new FlowLayout());
                 
                 
-		add(display, BorderLayout.NORTH);
 		display.setBackground(Color.white);
 		display.setEnabled(false);
 		display.setName("display");
 		display.setEnabled(false);
                 
+                Panel calcPanel = new Panel();
+                calcPanel.setLayout(new GridLayout(2,1));   
+                add(calcPanel, BorderLayout.CENTER);
+                calcPanel.add(display);
+
                 Panel buttonPanel = new Panel();
                 buttonPanel.setLayout(new GridLayout(6,3));   
-                add(buttonPanel, BorderLayout.CENTER);
+                calcPanel.add(buttonPanel);
                 
                 buttonPanel.add(sevenButton);
 		sevenButton.addActionListener(key7Listener);
