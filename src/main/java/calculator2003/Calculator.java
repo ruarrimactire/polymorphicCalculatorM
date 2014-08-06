@@ -19,54 +19,59 @@ public class Calculator extends Frame
 		setSize(400,200);
 		setBackground(Color.blue);
 		setLayout(new FlowLayout());
-		add(display);
+                
+                
+		add(display, BorderLayout.NORTH);
 		display.setBackground(Color.white);
 		display.setEnabled(false);
 		display.setName("display");
 		display.setEnabled(false);
                 
-                add(sevenButton);
+                Panel buttonPanel = new Panel();
+                buttonPanel.setLayout(new GridLayout(6,3));   
+                add(buttonPanel, BorderLayout.CENTER);
+                
+                buttonPanel.add(sevenButton);
 		sevenButton.addActionListener(key7Listener);
 		sevenButton.setName("sevenButton");
-                sevenButton.setSize(40, 40); //////////////////////////////////
-                add(eightButton);
+                buttonPanel.add(eightButton);
 		eightButton.addActionListener(key8Listener);
 		eightButton.setName("eightButton");
-                add(nineButton);
+                buttonPanel.add(nineButton);
 		nineButton.addActionListener(key9Listener);
 		nineButton.setName("nineButton");
 
-                add(fourButton);
+                buttonPanel.add(fourButton);
 		fourButton.addActionListener(key4Listener);
 		fourButton.setName("fourButton");
-                add(fiveButton);
+                buttonPanel.add(fiveButton);
 		fiveButton.addActionListener(key5Listener);
 		fiveButton.setName("fiveButton");
-                add(sixButton);
+                buttonPanel.add(sixButton);
 		sixButton.addActionListener(key6Listener);
 		sixButton.setName("sixButton");
 
-                add(oneButton);
+                buttonPanel.add(oneButton);
 		oneButton.addActionListener(key1Listener);
 		oneButton.setName("oneButton");
-                add(twoButton);
+                buttonPanel.add(twoButton);
 		twoButton.addActionListener(key2Listener);
 		twoButton.setName("twoButton");
-		add(threeButton);
+		buttonPanel.add(threeButton);
 		threeButton.addActionListener(key3Listener);
 		threeButton.setName("threeButton");
 		
-		add(zeroButton);
+		buttonPanel.add(zeroButton);
 		zeroButton.addActionListener(key0Listener);
 		zeroButton.setName("zeroButton");
-		add(plusButton);
+		buttonPanel.add(plusButton);
 		plusButton.addActionListener(plusListener);
 		plusButton.setName("plusButton");
-		add(minusButton);
+		buttonPanel.add(minusButton);
 		minusButton.addActionListener(minusListener);
 		minusButton.setName("minusButton");
 
-                add(equalsButton);
+                buttonPanel.add(equalsButton);
 		equalsButton.addActionListener(equalsListener);
 		equalsButton.setName("equalsButton");
 		addWindowListener(new Closer());
