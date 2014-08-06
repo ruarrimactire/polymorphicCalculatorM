@@ -3,6 +3,7 @@ package calculator2003;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JButton;
 
 /** This is the GUI for the Calculator model
  *	For a graphical calculator use this as the main.
@@ -16,7 +17,7 @@ public class Calculator extends Frame
 	{
 		super("Simple Calc");
 		setName("Calculator");
-		setSize(150,300);
+		setSize(200,400);
 		setBackground(Color.blue);
 		setLayout(new FlowLayout());
                 
@@ -101,35 +102,35 @@ public class Calculator extends Frame
 
 	// Set up the GUI
 
-        private Button sevenButton = new Button("7");
+        private JButton sevenButton = new JButton("7");
 	private ActionListener key7Listener = new KeyListener(key7);
-        private Button eightButton = new Button("8");
+        private JButton eightButton = new JButton("8");
 	private ActionListener key8Listener = new KeyListener(key8);
-        private Button nineButton = new Button("9");
+        private JButton nineButton = new JButton("9");
 	private ActionListener key9Listener = new KeyListener(key9);
 
-        private Button fourButton = new Button("4");
+        private JButton fourButton = new JButton("4");
 	private ActionListener key4Listener = new KeyListener(key4);
-        private Button fiveButton = new Button("5");
+        private JButton fiveButton = new JButton("5");
 	private ActionListener key5Listener = new KeyListener(key5);
-        private Button sixButton = new Button("6");
+        private JButton sixButton = new JButton("6");
 	private ActionListener key6Listener = new KeyListener(key6);
 
-        private Button oneButton = new Button("1");
+        private JButton oneButton = new JButton("1");
 	private ActionListener key1Listener = new KeyListener(key1);
-        private Button twoButton = new Button("2");
+        private JButton twoButton = new JButton("2");
 	private ActionListener key2Listener = new KeyListener(key2);
-        private Button threeButton = new Button("3");
+        private JButton threeButton = new JButton("3");
 	private ActionListener key3Listener = new KeyListener(key3);
 
-        private Button zeroButton = new Button("0");
+        private JButton zeroButton = new JButton("0");
 	private ActionListener key0Listener = new KeyListener(key0);
-        private Button plusButton = new Button("+");
+        private JButton plusButton = new JButton("+");
 	private ActionListener plusListener = new KeyListener(plus);
-	private Button minusButton = new Button("-");
+	private JButton minusButton = new JButton("-");
 	private ActionListener minusListener = new KeyListener(minus);
 
-        private Button equalsButton = new Button("=");
+        private JButton equalsButton = new JButton("=");
 	private ActionListener equalsListener = new KeyListener(equals);
 
         private TextField display = new TextField("0", 12);
