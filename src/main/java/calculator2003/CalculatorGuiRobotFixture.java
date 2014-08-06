@@ -1,15 +1,16 @@
 /*
  * Created on Nov 7, 2003
- *
+ * Modified on Aug 6, 2014 Filippo Didonna
+ * 
  */
 package calculator2003;
 
-import java.awt.*;
-import fit.Fixture;
-//import junit.framework.*;
-import junit.extensions.abbot.*;
+import abbot.finder.Matcher;
 import abbot.script.ComponentReference;
 import abbot.tester.ComponentTester;
+import fit.Fixture;
+import java.awt.*;
+import junit.extensions.abbot.*;
 
 /**
  * @author jbergin
@@ -41,26 +42,26 @@ public class CalculatorGuiRobotFixture extends Fixture
 		public void setUp() throws Exception
 		{
 			ComponentReference ref = new ComponentReference("twoButton", Button.class, "twoButton", "2");
-			button2 = (Button)getFinder().findComponent(ref);
+			button2 = (Button)getFinder().find((Matcher)ref);
 			testBasic = new ComponentTester();//ComponentTester.getTester(Button.class);
 			
 			ref = new ComponentReference("threeButton", Button.class, "threeButton", "3");
-			button3 = (Button)getFinder().findComponent(ref);
+			button3 = (Button)getFinder().find((Matcher)ref);
 			
 			ref = new ComponentReference("fiveButton", Button.class, "fiveButton", "5");
-			button5 = (Button)getFinder().findComponent(ref);
+			button5 = (Button)getFinder().find((Matcher)ref);
 			
 			ref = new ComponentReference("equalsButton", Button.class, "equalsButton", "equals");
-			buttonEquals = (Button)getFinder().findComponent(ref);
+			buttonEquals = (Button)getFinder().find((Matcher)ref);
 			
 			ref = new ComponentReference("plusButton", Button.class, "plusButton", "plus");
-			buttonPlus = (Button)getFinder().findComponent(ref);
+			buttonPlus = (Button)getFinder().find((Matcher)ref);
 			
 			ref = new ComponentReference("minusButton", Button.class, "minusButton", "minus");
-			buttonMinus = (Button)getFinder().findComponent(ref);
+			buttonMinus = (Button)getFinder().find((Matcher)ref);
 			
 			ref = new ComponentReference("display", TextField.class);
-			display = (TextField)getFinder().findComponent(ref);
+			display = (TextField)getFinder().find((Matcher)ref);
 			
 		}
 	
